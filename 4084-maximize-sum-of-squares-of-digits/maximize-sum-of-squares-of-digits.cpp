@@ -4,17 +4,19 @@ public:
         if (9 * num < sum) {
             return "";
         }
-        string ans = "";
-
-        for (int i = 0; i < num; i++) {
-            if (sum >= 9) {
-                ans += '9';
-                sum -= 9;
-            } else  {
-                ans += sum +'0';
-                sum = 0;
-            }
+        
+        int nines = sum / 9;
+        int rem = sum % 9;
+        
+        string ans = string(nines, '9');
+        if (rem > 0) {
+            ans += to_string(rem);
         }
-    return ans;
+        
+        if (ans.length() < num) {
+            ans.append(num - ans.length(), '0');
+        }
+        
+        return ans;
     }
 };
