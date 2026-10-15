@@ -5,15 +5,14 @@ public:
         int n = nums.size();
 
         for (int l = 0; l < n; l++) {
+            unordered_set<int> distinct_elements;
             for (int r = l; r < n; r++) {
-                set<int> s;
-
-                for (int i = l; i <= r; i++) {
-                    s.insert(nums[i]);
-                }
-                ans += (s.size()) * s.size();
+                distinct_elements.insert(nums[r]);
+                int count = distinct_elements.size();
+                ans += count * count;
             }
         }
+
         return ans;
     }
 };
