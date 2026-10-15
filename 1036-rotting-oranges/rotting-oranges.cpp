@@ -5,6 +5,7 @@ public:
         int n = grid[0].size();
         queue < pair<pair<int, int>, int> >q; // row, col and time
         vector<vector<int>> vis(m,vector<int>(n,0));
+        int cnt_fresh= 0;
 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -13,11 +14,13 @@ public:
                     vis[i][j] = 2;
                   
                 }
+                if (grid[i][j]==1)cnt_fresh++;
                
             }
         }
 
         int tm = 0;
+        int cnt=0;
 
         while (!q.empty()) {
             int r = q.front().first.first;
@@ -41,16 +44,14 @@ public:
                     vis[row][col] == 0 && grid[row][col] == 1) {
                     q.push({{row, col}, t + 1});
                     vis[row][col] = 2;// nu
+                    cnt++;
                 }
             }
         }
+        if (cnt!= cnt_fresh) return -1;
 
-         for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if(vis[i][j]!=2 && grid[i][j]==1){
-                    return -1;
-                }
-            }}
+
+       
         return tm;
     }
 };
