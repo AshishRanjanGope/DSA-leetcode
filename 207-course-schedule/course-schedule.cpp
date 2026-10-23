@@ -21,7 +21,7 @@ public:
 
         // creating adj list
         for (auto& p : pre) {
-            adj[p[1]].push_back(p[0]);
+            adj[p[0]].push_back(p[1]);
         }
 
         vector<int> vis(numC, 0);
