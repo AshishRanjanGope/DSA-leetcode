@@ -11,7 +11,8 @@ public:
         vector<vector<int>> dist(n, vector<int>(n, INT_MAX));
         dist[0][0] = 1;
 
-        queue<pair<int, p>> q;
+       
+priority_queue<pair<int, p>, vector<pair<int, p>>, greater<pair<int, p>>> q;
 
         if (grid[0][0] == 0) {
             q.push({1, {0, 0}});
@@ -21,13 +22,15 @@ public:
         int dc[] = {-1, 0, 1, 1, 0, -1, -1, 1};
 
         while (!q.empty()) {
-            int d = q.front().first;
-            int r = q.front().second.first;
-            int c = q.front().second.second;
+            int d = q.top().first;
+            int r = q.top().second.first;
+            int c = q.top().second.second;
 
             q.pop();
 
-            if (r==dest.first && c== dest.second){
+            if (d>dist[r][c]) continue;// optimisation : ignore stale nodes
+
+            if (r==dest.first && c== dest.second){// found
                 return d;
             }
 
