@@ -1,34 +1,39 @@
 class Solution {
 public:
-    int candy(vector<int>& rat) {
-        int n = rat.size();
-       vector<int> LR(n,1);
-       vector<int> RL(n,1);
+    int candy(vector<int>& ratings) {
+        int n= ratings.size();
+        int i=1;
+        int candy=n;
 
-        // left to right
-        for (int i = 1; i < n; i++) {
-            if (rat[i - 1] < rat[i]) {
-               
-            LR[i] = LR[i - 1] + 1;
+        while (i<n){
+            //equal condn
+            while(i<n && ratings[i]==ratings[i-1]){
+                i++;
+                
+
             }
-        }
-        //right to left
-        for (int i = n-2; i >=0; i--) {
-            if (rat[i +1] < rat[i]) {
-              
-               RL[i]= RL[i + 1] + 1;
+            int peak=0;
+            while(i<n && ratings[i]>ratings[i-1]){ //increasing
+                peak++;
+                candy+=peak;
+                i++;
+
+                if(i==n)return candy;
+
             }
+
+            //decreasing
+            int dip=0;
+            while(i<n && ratings[i]<ratings[i-1]){
+                dip++;
+                candy+=dip;
+                i++;
+
+            }
+            candy-=min(peak,dip);
+
         }
-        int sum=0;
-
-        for (int i = 0; i < n; i++) {
-            sum+=max(LR[i],RL[i]);
-
-        }
-        return sum;
-
-
-
-
+        return candy;
+        
     }
 };
