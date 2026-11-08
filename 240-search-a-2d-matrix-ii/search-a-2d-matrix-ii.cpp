@@ -1,39 +1,22 @@
 class Solution {
 public:
-    bool binsearch(vector<int>& a, int tg){
-        int n= a.size();
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int n = matrix.size();
+        int m = matrix[0].size();
+        int i = 0;
+        int j = m - 1;
 
-        int s= 0;
-        int e= n-1;
-        int mid = s + (e - s) / 2;
-        while (s<=e){
-           
-        mid = s + (e - s) / 2;
-            if (tg== a[mid]){
+        while (i < n && j>= 0) { 
+            if (matrix[i][j] == target) {
                 return true;
-
             }
-            else if (tg>a[mid]){
-                s=mid+1;
+            else if (target > matrix[i][j]) {
+                i++;
+            } else if (target < matrix[i][j]) {
+                j--;
             }
-            else{
-                e=mid-1;
-            }
-
 
         }
         return false;
-    }
-    bool searchMatrix(vector<vector<int>>& matrix, int target) {
-        bool found =false;
-        int n=matrix.size();
-
-        for (int i=0;i<n;i++){
-            if (binsearch(matrix[i],target)){
-                found= true;
-            }
-        }
-        return found;
-        
     }
 };
