@@ -13,14 +13,16 @@ public:
         deque<int> dq;
 
         for (int i = 0; i <= n; i++) {
-            while (!dq.empty() && pref[i] - pref[dq.front()] >= k) {
+
+            while (!dq.empty() && pref[i] - pref[dq.front()] >= k) { //check the range sum is atleast k;
                 ans = min(ans, i - dq.front());
                 dq.pop_front();
             }
-            while (!dq.empty() && pref[i] <= pref[dq.back()]) {
+            while (!dq.empty() && pref[i] <= pref[dq.back()]) { // check pref is decreasing
                 dq.pop_back();
             }
-            dq.push_back(i);
+
+            dq.push_back(i);// pushing deque
         }
         return ans == n + 1 ? -1 : ans;
     }
